@@ -9,12 +9,15 @@ regras = {
     "TESOURA": "PAPEL",
     "PAPEL": "PEDRA"
 }
+
+historico_partidas = []
    
 def jokenpo(jogada) :
    jogador = 0 
    sistema = 0
    jogada_usuario = ""
    jogada_sistema = ""
+   vencedor = ""
 
    jogada_usuario = jogada.upper().strip()
   
@@ -31,19 +34,38 @@ def jokenpo(jogada) :
 
     
    if jogada_usuario == jogada_sistema:
-       menssagem = "😐 --- Empatou ---"
+       mensagem = "😐 --- Empatou ---"
+       vencedor = "empate"
    elif regras.get(jogada_usuario)== jogada_sistema:
-       menssagem = "🏆💥 Você Venceu! 💥🏆"
+       mensagem = "🏆💥 Você Venceu! 💥🏆"
        jogador += 1
+       vencedor = "jogador"
    else : 
-       menssagem = "💀❌ Você Perdeu! ❌💀"
+       mensagem = "💀❌ Você Perdeu! ❌💀"
        sistema += 1
+       vencedor = "sistema"
+ 
+   resultado_atual = {
+            "rodada": len(historico_partidas) + 1,
+            "sua_escolha": jogada_usuario,
+            "escolha_sistema": jogada_sistema,
+            "vencedor": vencedor
+        }
+        
+   historico_partidas.append(resultado_atual)
+   print(historico_partidas)
+
+   resumo_final = None
+   if len(historico_partidas) >= 3:
+            resumo_final = historico_partidas[:] 
+            historico_partidas.clear() 
    return {
-        "sua_escolha": jogada_usuario,
-        "escolha_sistema": jogada_sistema,
-        "mensagem": menssagem
-    } 
-       
+            "resultado_rodada": mensagem,
+            "dados": resultado_atual,
+            "torneio_completo": resumo_final 
+        }
+
+
 
 
 
