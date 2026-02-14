@@ -11,6 +11,11 @@ regras = {
 }
 
 historico_partidas = []
+
+def instrucoes():
+    return {
+        "mensagem": "Use /jogar/pedra, /jogar/papel ou /jogar/tesoura para jogar."
+    }
    
 def jokenpo(jogada) :
    jogador = 0 
