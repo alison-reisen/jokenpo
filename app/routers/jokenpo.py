@@ -4,9 +4,9 @@ from app.services import regras_jogo
 
 router = APIRouter()
 
-#@router.get("/jogar")
-  #  return("Escolha um das opções e preencha na url após o / : Pedra, Papel ou tesoura")
-
+@router.get("/jogar")
+async def como_jogar():
+    return regras_jogo.instrucoes()
 
 @router.get("/jogar/{escolha}")
 async def jogar(escolha: str):
